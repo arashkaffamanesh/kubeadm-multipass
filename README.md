@@ -50,8 +50,8 @@ Note: we're using Calico here, if 192.178.0.0/16 is already in use within your n
 
 ## Blog post
 
-A related blog post will be published on medium soon:
+A related blog post is published on medium:
 
-https://blog.kubernauts.io/
+https://blog.kubernauts.io/simplicity-matters-kubernetes-1-16-fffbf7e84944
 
 
