@@ -16,6 +16,7 @@ multipass exec master -- bash -c 'sudo usermod -aG docker multipass'
 multipass exec master -- bash -c 'sudo apt-get install -y kubelet kubeadm kubectl'
 multipass exec master -- bash -c 'sudo apt-mark hold kubelet kubeadm kubectl'
 multipass exec master -- bash -c 'sudo swapoff -a'
+multipass exec master -- bash -c  "sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab"
 multipass exec master -- bash -c 'sudo sysctl net.bridge.bridge-nf-call-iptables=1'
 multipass exec master -- bash -c 'sudo kubeadm init --pod-network-cidr=192.178.0.0/16'
 multipass exec master -- bash -c 'sudo cat /etc/kubernetes/admin.conf' > kubeconfig.yaml
@@ -25,5 +26,4 @@ kubectl apply -f calico.yaml
 kubectl rollout status daemonset calico-node -n kube-system
 kubectl get nodes -o wide
 echo "Enjoy the kubeadm made Kubernetes 1.6 on Multipass"
-echo "Please take a note of the kubeadm join command above"
-echo "You should now run ./2-deploy-kubeadm-nodes.sh to build a multi-node cluster"
+echo "Now deploying the worker nodes"

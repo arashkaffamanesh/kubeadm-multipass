@@ -17,20 +17,12 @@ multipass exec ${NODE} -- bash -c 'sudo systemctl daemon-reload'
 multipass exec ${NODE} -- bash -c 'sudo systemctl restart docker'
 multipass exec ${NODE} -- bash -c 'sudo usermod -aG docker multipass'
 multipass exec ${NODE} -- bash -c 'sudo apt-get install -y kubelet kubeadm kubectl'
-# multipass exec ${NODE} -- bash -c 'sudo apt-mark hold kubelet kubeadm kubectl'
+multipass exec ${NODE} -- bash -c 'sudo apt-mark hold kubelet kubeadm kubectl'
 multipass exec ${NODE} -- bash -c 'sudo swapoff -a'
+multipass exec ${NODE} -- bash -c  "sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab"
 multipass exec ${NODE} -- bash -c 'sudo sysctl net.bridge.bridge-nf-call-iptables=1'
 done
 
-echo "Now run multipass shell worker1 and run the kuneadm join command with sudo on the nodes"
-echo "something like this:"
-echo "sudo kubeadm join 192.168.64.33:6443 --token akedou.fej8ghxu0vmud4zl --discovery-token-ca-cert-hash ....."
-echo "and lable your worker nodes with"
-echo "kubectl label node worker1 node-role.kubernetes.io/node="
-echo "kubectl label node worker2 node-role.kubernetes.io/node="
-echo "What does kubectl get nodes -o wide say?"
+echo "Now running kubeadm join nodes"
+echo "We're ready soon :-)"
 
-# todo: try to automate 
-# sudo kubeadm join 192.168.64.33:6443 --token akedou.fej8ghxu0vmud4zl --discovery-token-ca-cert-hash sha256:0154b595e6f5fafa7e2a640ea36936482a834da4805b19ed780996397c57bfe5
-# kubectl label node worker1 node-role.kubernetes.io/node=
-# kubectl label node worker2 node-role.kubernetes.io/node=

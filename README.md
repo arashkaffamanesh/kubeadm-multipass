@@ -1,6 +1,6 @@
 # Multi-Node Kubernetes 1.16 with kubeadm on multipass
 
-These simple scripts deploy a multi-node Kubernetes 1.16 with kuneadm on multipass VMs on your local machine.
+These simple scripts deploy a multi-node Kubernetes 1.16 with kubeadm on multipass VMs on your local machine.
 
 ## Prerequsists
 
@@ -8,23 +8,35 @@ You need kubectl and multipass installed on your laptop.
 
 ## Installation
 
-Deploy the master node with:
+Deploy the master node, 2 worker nodes and join the worker nodes into the cluster step by step:
+
+```bash
+./1-deploy-kubeadm-matser.sh
+./2-deploy-kubeadm-nodes.sh
+./3-kubeadm_join_nodes.sh
+```
+
+or deploy with a single command:
 
 ```bash
 ./deploy.sh
 ```
 
-and take a note of the `kubeadm join` command.
+That's it :-)
 
-Deploy the worker nodes with:
+You should get something similar to this:
 
 ```bash
-./2-deploy-kubeadm-nodes.sh
+NAME      STATUS   ROLES    AGE     VERSION
+master    Ready    master   6m24s   v1.16.0
+worker1   Ready    node     42s     v1.16.0
+worker2   Ready    node     32s     v1.16.0
+############################################################################
+Enjoy and learn to love learning :-)
+Total runtime in minutes was: 09:12
+############################################################################
 ```
 
-And follow the instructions from the output to join your worker nodes.
-
-That's it :-)
 
 ## Troubleshooting
 
@@ -36,5 +48,10 @@ Note: we're using Calico here, if 192.178.0.0/16 is already in use within your n
 ./cleanup.sh
 ```
 
+## Blog post
+
+A related blog post will be published on medium soon:
+
+https://blog.kubernauts.io/
 
 
