@@ -6,13 +6,13 @@ multipass exec master -- bash -c 'sudo apt-add-repository "deb http://apt.kubern
 multipass exec master -- bash -c 'sudo apt-get update && apt-get install -y apt-transport-https'
 multipass exec master -- bash -c 'curl https://releases.rancher.com/install-docker/18.09.sh | sh'
 # Setup daemon.
-multipass transfer daemon.json master:/home/multipass/
-multipass exec master -- bash -c 'sudo cp /home/multipass/daemon.json /etc/docker/daemon.json'
+multipass transfer daemon.json master:
+multipass exec master -- bash -c 'sudo cp /home/ubuntu/daemon.json /etc/docker/daemon.json'
 multipass exec master -- bash -c 'sudo mkdir -p /etc/systemd/system/docker.service.d'
 # Restart docker.
 multipass exec master -- bash -c 'sudo systemctl daemon-reload'
 multipass exec master -- bash -c 'sudo systemctl restart docker'
-multipass exec master -- bash -c 'sudo usermod -aG docker multipass'
+multipass exec master -- bash -c 'sudo usermod -aG docker ubuntu'
 multipass exec master -- bash -c 'sudo apt-get install -y kubelet kubeadm kubectl'
 multipass exec master -- bash -c 'sudo apt-mark hold kubelet kubeadm kubectl'
 multipass exec master -- bash -c 'sudo swapoff -a'
@@ -25,5 +25,5 @@ KUBECONFIG=kubeconfig.yaml
 kubectl apply -f calico.yaml
 kubectl rollout status daemonset calico-node -n kube-system
 kubectl get nodes -o wide
-echo "Enjoy the kubeadm made Kubernetes 1.6 on Multipass"
+echo "Enjoy the kubeadm made Kubernetes 1.6.x on Multipass"
 echo "Now deploying the worker nodes"

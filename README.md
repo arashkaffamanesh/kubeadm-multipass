@@ -1,10 +1,33 @@
-# Multi-Node Kubernetes 1.16 with kubeadm on multipass
+# Multi-Node Kubernetes 1.16.x with kubeadm on multipass and Rancher Server on top
 
 These simple scripts deploy a multi-node Kubernetes 1.16 with kubeadm on multipass VMs on your local machine.
 
 ## Prerequsists
 
 You need kubectl and multipass installed on your laptop.
+
+### Install multipass (on MacOS Catalina or Linux)
+
+Update 01/11/2019
+
+Multipass v0.9 RC has been updated for MacOS Catalina, please download this release:
+
+https://github.com/CanonicalLtd/multipass/releases
+
+
+```bash
+wget https://github.com/CanonicalLtd/multipass/releases/download/v0.9.0-rc/multipass-0.9.0-rc.425+g37fa4305.mac-Darwin.pkg
+sudo installer -target / -verbose -pkg multipass-0.9.0-rc.425+g37fa4305.mac-Darwin.pkg
+snap install multipass --channel beta/0.9 --classic
+```
+
+### Install on MacOS Mojave
+
+Please checkout the mojave branch:
+
+```bash
+git clone https://github.com/arashkaffamanesh/multipass-rke-rancher.git -b mojave-multipass-0.8
+```
 
 ## Installation
 
@@ -22,7 +45,7 @@ or deploy with a single command:
 ./deploy.sh
 ```
 
-That's it :-)
+
 
 You should get something similar to this:
 
@@ -37,6 +60,15 @@ Total runtime in minutes was: 09:12
 ############################################################################
 ```
 
+## Deploy Rancher Server
+
+You can deploy Rancher Server on top your kubeadm cluster with:
+
+```bash
+./4-deploy-rancher-on-kubeadm.sh
+```
+
+That's it :-)
 
 ## Troubleshooting
 

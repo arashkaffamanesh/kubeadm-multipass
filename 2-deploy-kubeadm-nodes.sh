@@ -9,13 +9,13 @@ multipass exec ${NODE} -- bash -c 'sudo apt-add-repository "deb http://apt.kuber
 multipass exec ${NODE} -- bash -c 'sudo apt-get update && apt-get install -y apt-transport-https'
 multipass exec ${NODE} -- bash -c 'curl https://releases.rancher.com/install-docker/18.09.sh | sh'
 # Setup daemon.
-multipass transfer daemon.json ${NODE}:/home/multipass/
-multipass exec ${NODE} -- bash -c 'sudo cp /home/multipass/daemon.json /etc/docker/daemon.json'
+multipass transfer daemon.json ${NODE}:
+multipass exec ${NODE} -- bash -c 'sudo cp /home/ubuntu/daemon.json /etc/docker/daemon.json'
 multipass exec ${NODE} -- bash -c 'sudo mkdir -p /etc/systemd/system/docker.service.d'
 # Restart docker.
 multipass exec ${NODE} -- bash -c 'sudo systemctl daemon-reload'
 multipass exec ${NODE} -- bash -c 'sudo systemctl restart docker'
-multipass exec ${NODE} -- bash -c 'sudo usermod -aG docker multipass'
+multipass exec ${NODE} -- bash -c 'sudo usermod -aG docker ubuntu'
 multipass exec ${NODE} -- bash -c 'sudo apt-get install -y kubelet kubeadm kubectl'
 multipass exec ${NODE} -- bash -c 'sudo apt-mark hold kubelet kubeadm kubectl'
 multipass exec ${NODE} -- bash -c 'sudo swapoff -a'

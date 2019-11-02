@@ -2,9 +2,9 @@
 NODES=$(echo worker{1..2})
 
 for NODE in ${NODES}; do
-multipass exec ${NODE} -- bash -c "sudo mkdir -p /home/multipass/.kube/"
-multipass exec ${NODE} -- bash -c "sudo chown multipass:multipass /home/multipass/.kube/"
-multipass transfer kubeconfig.yaml ${NODE}:/home/multipass/.kube/config
+multipass exec ${NODE} -- bash -c "sudo mkdir -p /home/ubuntu/.kube/"
+multipass exec ${NODE} -- bash -c "sudo chown ubuntu:ubuntu /home/ubuntu/.kube/"
+multipass transfer kubeconfig.yaml ${NODE}:/home/ubuntu/.kube/config
 multipass exec ${NODE} -- bash -c "sudo kubeadm token create --print-join-command >> kubeadm_join_cmd.sh"
 multipass exec ${NODE} -- bash -c "sudo chmod +x kubeadm_join_cmd.sh"
 multipass exec ${NODE} -- bash -c "sudo sh ./kubeadm_join_cmd.sh"
