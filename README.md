@@ -47,7 +47,7 @@ or deploy with a single command:
 ./deploy.sh
 ```
 
-## Installation (3 node with contaienrd)
+## Installation (3 node with containerd)
 
 Deploy the master node, 2 worker nodes and join the worker nodes into the cluster step by step:
 
