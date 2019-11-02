@@ -72,7 +72,7 @@ worker1   Ready    node     42s     v1.16.2
 worker2   Ready    node     32s     v1.16.2
 ############################################################################
 Enjoy and learn to love learning :-)
-Total runtime in minutes was: 09:12
+Total runtime in minutes was: 06:30
 ############################################################################
 ```
 
