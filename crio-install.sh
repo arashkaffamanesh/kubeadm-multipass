@@ -1,5 +1,5 @@
 #!/bin/bash
-## Kubeadm with cri-o, flannel and podman
+## Kubeadm with cri-o, flannel and podman on Ubuntu 18.04
 ## How to use:
 ## wget https://raw.githubusercontent.com/arashkaffamanesh/kubeadm-multipass/master/crio-install.sh
 ## chmod +x crio-install.sh
