@@ -1,15 +1,11 @@
 #!/bin/bash
 ## Run a single ubuntu 18.04 with multipass on your local machine
-multipass launch ubuntu --name master --cpus 2 --mem 2G --disk 8G
-multipass shell master
 ## Build crio from source
-sudo -i
+git clone https://github.com/cri-o/cri-o && cd /root/cri-o
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 018BA5AD9DF57A4448F0E6CF8BECF1637AD8C79D
 echo "deb http://ppa.launchpad.net/projectatomic/ppa/ubuntu bionic main" > /etc/apt/sources.list.d/crio.list
 apt-add-repository ppa:projectatomic/ppa -y
 apt-get update -qq && apt-get install -y runc conmon btrfs-tools containers-common git golang-go libassuan-dev libdevmapper-dev libglib2.0-dev libc6-dev libgpgme11-dev libgpg-error-dev libseccomp-dev libsystemd-dev libselinux1-dev pkg-config go-md2man cri-o-runc libudev-dev software-properties-common gcc make
-git clone https://github.com/cri-o/cri-o
-cd cri-o/
 go get github.com/cpuguy83/go-md2man
 make BUILDTAGS=""
 make install
@@ -19,7 +15,7 @@ cp /root/cri-o/crio.conf /etc/crio/
 cp /root/cri-o/crictl.yaml /etc/
 systemctl daemon-reload
 systemctl start crio
-systemctl status crio.service
+# systemctl status crio.service
 
 ## Install kubeadm
 
@@ -40,15 +36,18 @@ kubeadm init --pod-network-cidr=10.244.0.0/16
 ## calico
 # kubeadm init --pod-network-cidr=192.178.0.0/16
 
+echo "##########################################"
+echo "kubeadm is installed"
+echo "##########################################"
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+wget https://raw.githubusercontent.com/arashkaffamanesh/kubeadm-multipass/master/kube-flannel.yml
 kubectl apply -f kube-flannel.yml
 ## weave
 # ./install_tools.sh setup_network
 
 ## Install podman
-
 sudo apt -y  install software-properties-common
 sudo apt update
 sudo apt -y install podman
@@ -57,17 +56,20 @@ sudo curl https://raw.githubusercontent.com/projectatomic/registries/master/regi
 sudo curl https://raw.githubusercontent.com/containers/skopeo/master/default-policy.json -o /etc/containers/policy.json
 systemctl daemon-reload
 systemctl restart crio
+sleep 30
 
 ## Tets it
 ./install_tools.sh enbale_pod_scheduling_on_master
+# crictl ps
+kubectl rollout status deployment coredns -n kube-system
 kubectl get nodes
+kubectl run --generator=deployment/apps.v1 ghost --image ghost:latest
 kubectl get pods -A
-crictl ps
-kubectl run --generator=run-pod/v1 ghost --image ghost:latest
-kubectl get pods 
+kubectl rollout status deployment ghost
+
 
 ## related links
-https://docs.cilium.io/en/v1.6/kubernetes/configuration/#crio
-https://computingforgeeks.com/how-to-install-podman-on-ubuntu/
-https://www.linode.com/docs/applications/containers/kubernetes/getting-started-with-kubernetes/
-https://launchpad.net/~projectatomic/+archive/ubuntu/ppa?field.series_filter=bionic
+#https://docs.cilium.io/en/v1.6/kubernetes/configuration/#crio
+#https://computingforgeeks.com/how-to-install-podman-on-ubuntu/
+#https://www.linode.com/docs/applications/containers/kubernetes/getting-started-with-kubernetes/
+#https://launchpad.net/~projectatomic/+archive/ubuntu/ppa?field.series_filter=bionic
