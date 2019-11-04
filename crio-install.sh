@@ -67,6 +67,9 @@ kubectl get nodes
 kubectl run --generator=deployment/apps.v1 ghost --image ghost:latest
 kubectl get pods -A
 kubectl rollout status deployment ghost
+kubectl get pods
+
+echo "hope you have fun with crio and podman on kubeadm :-)"
 
 
 ## related links
