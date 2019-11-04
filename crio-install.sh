@@ -1,5 +1,9 @@
 #!/bin/bash
-## Run a single ubuntu 18.04 with multipass on your local machine
+## Kubeadm with cri-o, flannel and podman
+## How to use:
+## wget https://raw.githubusercontent.com/arashkaffamanesh/kubeadm-multipass/master/crio-install.sh
+## chmod +x crio-install.sh
+## ./crio-install.sh
 ## Build crio from source
 git clone https://github.com/cri-o/cri-o && cd /root/cri-o
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 018BA5AD9DF57A4448F0E6CF8BECF1637AD8C79D
