@@ -1,6 +1,6 @@
-# Multi-Node Kubernetes 1.16.x with kubeadm on local multipass cloud with docker or containerd and Rancher Server on top
+# Multi-Node Kubernetes 1.16.x with kubeadm on local multipass cloud with Docker, Containerd or CRI-O and Rancher Server on top
 
-These simple scripts deploy a multi-node Kubernetes 1.16.2 with kubeadm on multipass VMs with containerd or docker on your local machine in about 6 minutes, depending on your internet speed.
+These simple scripts deploy a multi-node Kubernetes 1.16.2 with kubeadm on multipass VMs with Containerd, Docker or CRI-O on your local machine in about 6 minutes, depending on your internet speed.
 
 ## About Multipass
 
@@ -76,7 +76,18 @@ Total runtime in minutes was: 06:30
 ############################################################################
 ```
 
+## Just for fun (kubeadm with CRI-O)
 
+Launch a single Ubuntu VM with multipass and try CRI-O with kubeadm and podman:
+
+```bash
+multipass launch ubuntu --name master --cpus 2 --mem 2G --disk 8G
+multipass shell master
+sudo -i
+wget https://raw.githubusercontent.com/arashkaffamanesh/kubeadm-multipass/master/crio-install.sh
+chmod +x crio-install.sh
+./crio-install.sh
+```
 
 ## Deploy Rancher Server
 
@@ -87,6 +98,7 @@ You can deploy Rancher Server on top your kubeadm cluster with:
 ```
 
 That's it :-)
+
 
 ## Troubleshooting
 
