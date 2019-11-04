@@ -44,6 +44,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 wget https://raw.githubusercontent.com/arashkaffamanesh/kubeadm-multipass/master/kube-flannel.yml
 kubectl apply -f kube-flannel.yml
+kubectl rollout status daemonset.apps/kube-flannel-ds-amd64 -n kube-system
 ## weave
 # ./install_tools.sh setup_network
 
