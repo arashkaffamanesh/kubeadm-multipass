@@ -36,7 +36,7 @@ chmod +x install_tools.sh
 ./install_tools.sh install_tools
 # https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 ## kubeadm with flannel
-kubeadm init --pod-network-cidr=10.244.0.0/16
+kubeadm init --pod-network-cidr=10.244.0.0/16 --skip-token-print
 ## calico
 # kubeadm init --pod-network-cidr=192.178.0.0/16
 
@@ -77,7 +77,8 @@ echo "hope you have fun with crio and podman on kubeadm :-)"
 
 
 ## related links
-#https://docs.cilium.io/en/v1.6/kubernetes/configuration/#crio
-#https://computingforgeeks.com/how-to-install-podman-on-ubuntu/
-#https://www.linode.com/docs/applications/containers/kubernetes/getting-started-with-kubernetes/
-#https://launchpad.net/~projectatomic/+archive/ubuntu/ppa?field.series_filter=bionic
+# https://itnext.io/on-premise-ha-kubernetes-cluster-15e41f18bd12
+# https://docs.cilium.io/en/v1.6/kubernetes/configuration/#crio
+# https://computingforgeeks.com/how-to-install-podman-on-ubuntu/
+# https://www.linode.com/docs/applications/containers/kubernetes/getting-started-with-kubernetes/
+# https://launchpad.net/~projectatomic/+archive/ubuntu/ppa?field.series_filter=bionic
