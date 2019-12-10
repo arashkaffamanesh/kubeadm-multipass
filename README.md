@@ -12,23 +12,15 @@ You need kubectl and multipass installed on your laptop.
 
 ### Install multipass (on MacOS Catalina or Linux)
 
-Multipass v0.9 RC has been updated for MacOS Catalina, please download this release:
+Multipass v0.9 has been released for MacOS Catalina, please download the latest release:
 
 https://github.com/CanonicalLtd/multipass/releases
 
 
 ```bash
-wget https://github.com/CanonicalLtd/multipass/releases/download/v0.9.0-rc/multipass-0.9.0-rc.425+g37fa4305.mac-Darwin.pkg
-sudo installer -target / -verbose -pkg multipass-0.9.0-rc.425+g37fa4305.mac-Darwin.pkg
+wget https://github.com/CanonicalLtd/multipass/releases/download/v0.9.0/multipass-0.9.0+mac-Darwin.pkg
+sudo installer -target / -verbose -pkg multipass-0.9.0+mac-Darwin.pkg
 snap install multipass --channel beta/0.9 --classic
-```
-
-### Install on MacOS Mojave
-
-Please checkout the mojave branch:
-
-```bash
-git clone https://github.com/arashkaffamanesh/multipass-rke-rancher.git -b mojave-multipass-0.8
 ```
 
 ## Installation (3 node with docker)
