@@ -130,6 +130,18 @@ With that you can eypose services over a valid HTTPS connection with your privat
 
 Change the whoami service type to LoadBalancer and see what happens :-)
 
+Change the rancher service type to LoadBalancer and adapt the host entry in rancher ingress to point to rancher.k8s.local and make sure your /etc/hosts has an entry like this:
+
+192.168.64.23 whoami.k8s.local
+192.168.64.23 rancher.k8s.local
+
+N.B.: 192.168.64.23 is the IP of the traefik ingress controller service!
+
+```bash
+open https://rancher.k8s.local
+#Should take you via HTTPS to Rancher without any warnings :-)
+```
+
 That's it :-)
 
 ## Troubleshooting
