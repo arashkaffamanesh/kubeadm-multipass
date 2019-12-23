@@ -83,14 +83,54 @@ chmod +x crio-install.sh
 
 ## Deploy Rancher Server
 
-You can deploy Rancher Server on top your kubeadm cluster with:
+You can deploy Rancher Server on top of your kubeadm cluster with:
 
 ```bash
 ./4-deploy-rancher-on-kubeadm.sh
+# a browser tab should pop up to Rancher Server UI
 ```
 
-That's it :-)
+## Traefik with mkcert to create a local certificate authority with wildcard certificate
 
+```bash
+brew install mkcert
+mkcert --install
+# provision a wildcard certificate for our new local domain
+mkcert '*.k8s.local'
+# This will create two files: _wildcard.k8s.local-key.pem and _wildcard.k8s.local.pem.
+kubectl -n kube-system create secret tls traefik-tls-cert --key=_wildcard.k8s.local-key.pem --cert=_wildcard.k8s.local.pem
+```
+
+### Setting up Traefik
+
+```bash
+kubectl apply -f configmap.yml
+kubectl create -f traefik.yaml
+kubectl apply -f rbac.yml
+get pods -n kube-system | grep traefik
+# you should see a line that looks like the following
+traefik-ingress-controller-68c5fbccbd-5kjvw   1/1     Running
+```
+
+### Testing with whoami
+
+```bash
+kubectl create -f whoami-deployment.yml
+# create a host entry in /etc/hosts like this to the IP of the traefik ingress controller svc
+# 192.168.64.23 whoami.k8s.local 
+curl https://whoami.k8s.local
+# or
+open https://whoami.k8s.local
+# it should work
+```
+
+With that you can eypose services over a valid HTTPS connection with your private local CA!
+
+### Exercise 
+
+Change the whoami service type to LoadBalancer and see what happens :-)
+
+That's it :-)
 
 ## Troubleshooting
 
@@ -107,5 +147,11 @@ Note: we're using Calico here, if 192.178.0.0/16 is already in use within your n
 A related blog post is published on medium:
 
 https://blog.kubernauts.io/simplicity-matters-kubernetes-1-16-fffbf7e84944
+
+## Related resources
+
+https://medium.com/localz-engineering/kubernetes-traefik-locally-with-a-wildcard-certificate-e15219e5255d
+
+
 
 
