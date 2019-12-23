@@ -59,9 +59,9 @@ You should get something similar to this at the end:
 
 ```bash
 NAME      STATUS   ROLES    AGE     VERSION
-master    Ready    master   6m24s   v1.16.2
-worker1   Ready    node     42s     v1.16.2
-worker2   Ready    node     32s     v1.16.2
+master    Ready    master   8m55s   v1.17.0
+worker1   Ready    node     3m45s   v1.17.0
+worker2   Ready    node     3m24s   v1.17.0
 ############################################################################
 Enjoy and learn to love learning :-)
 Total runtime in minutes was: 06:30
