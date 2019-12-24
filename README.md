@@ -30,7 +30,7 @@ snap install multipass --channel beta/0.9 --classic
 Deploy the master node, 2 worker nodes and join the worker nodes into the cluster step by step:
 
 ```bash
-./1-deploy-kubeadm-matser.sh
+./1-deploy-kubeadm-master.sh
 ./2-deploy-kubeadm-nodes.sh
 ./3-kubeadm_join_nodes.sh
 ```
@@ -156,7 +156,7 @@ That's it :-)
 
 ## Troubleshooting
 
-Note: we're using Calico here, if 192.178.0.0/16 is already in use within your network you must select a different pod network CIDR, replacing 192.178.0.0/16 in the kubeadm init command in `./1-deploy-kubeadm-matser.sh` script as well as in the `calico.yaml` file provided in this repo.
+Note: we're using Calico here, if 192.178.0.0/16 is already in use within your network you must select a different pod network CIDR, replacing 192.178.0.0/16 in the kubeadm init command in `./1-deploy-kubeadm-master.sh` script as well as in the `calico.yaml` file provided in this repo.
 
 ## Cleanup
 
