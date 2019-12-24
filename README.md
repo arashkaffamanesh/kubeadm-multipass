@@ -1,3 +1,5 @@
+![kubeadm-multipass.png](kubeadm-multipass.png)
+
 # Multi-Node Kubernetes 1.17 with kubeadm on local multipass cloud with Docker, Containerd or CRI-O and Rancher Server on top
 
 These simple scripts deploy a multi-node Kubernetes 1.16.2 with kubeadm on multipass VMs with Containerd, Docker or CRI-O on your local machine in about 6 minutes, depending on your internet speed.
@@ -88,6 +90,12 @@ You can deploy Rancher Server on top of your kubeadm cluster with:
 ```bash
 ./4-deploy-rancher-on-kubeadm.sh
 # a browser tab should pop up to Rancher Server UI
+```
+
+## Install MetalLB
+
+```bash
+./install-metal-lb.sh
 ```
 
 ## Traefik with mkcert to create a local certificate authority with wildcard certificate
