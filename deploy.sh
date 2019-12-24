@@ -1,6 +1,6 @@
 #!/bin/bash
 res1=$(date +%s)
-./1-deploy-kubeadm-matser.sh
+./1-deploy-kubeadm-master.sh
 ./2-deploy-kubeadm-nodes.sh
 ./3-kubeadm_join_nodes.sh
 res2=$(date +%s)
