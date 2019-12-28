@@ -10,9 +10,8 @@ multipass exec ${NODE} -- bash -c "sudo chmod +x kubeadm_join_cmd.sh"
 multipass exec ${NODE} -- bash -c "sudo sh ./kubeadm_join_cmd.sh"
 done
 sleep 30
-KUBECONFIG=kubeconfig.yaml
-kubectl label node worker1 node-role.kubernetes.io/node=
-kubectl label node worker2 node-role.kubernetes.io/node=
-kubectl get nodes
+KUBECONFIG=kubeconfig.yaml kubectl label node worker1 node-role.kubernetes.io/node=
+KUBECONFIG=kubeconfig.yaml kubectl label node worker2 node-role.kubernetes.io/node=
+KUBECONFIG=kubeconfig.yaml kubectl get nodes
 echo "############################################################################"
 echo "Enjoy :-)"

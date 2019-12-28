@@ -20,10 +20,11 @@ multipass exec master -- bash -c  "sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/
 multipass exec master -- bash -c 'sudo sysctl net.bridge.bridge-nf-call-iptables=1'
 multipass exec master -- bash -c 'sudo kubeadm init --pod-network-cidr=192.178.0.0/16'
 multipass exec master -- bash -c 'sudo cat /etc/kubernetes/admin.conf' > kubeconfig.yaml
-KUBECONFIG=kubeconfig.yaml
+# export KUBECONFIG=kubeconfig.yaml
 # kubectl apply -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
-kubectl apply -f calico.yaml
-kubectl rollout status daemonset calico-node -n kube-system
-kubectl get nodes -o wide
+echo "now deploying calico ...."
+KUBECONFIG=kubeconfig.yaml kubectl create -f calico.yaml
+KUBECONFIG=kubeconfig.yaml kubectl rollout status daemonset calico-node -n kube-system
+KUBECONFIG=kubeconfig.yaml kubectl get nodes -o wide
 echo "Enjoy the kubeadm made Kubernetes 1.6.x on Multipass"
 echo "Now deploying the worker nodes"

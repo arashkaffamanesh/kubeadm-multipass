@@ -11,10 +11,11 @@ multipass exec master -- bash -c './install_tools.sh create_containerd_kubelet_c
 multipass exec master -- bash -c './install_tools.sh bring_up_cluster'
 multipass exec master -- bash -c './install_tools.sh setup_kubectl_conf'
 multipass exec master -- bash -c 'sudo cat /etc/kubernetes/admin.conf' > kubeconfig.yaml
-KUBECONFIG=kubeconfig.yaml
+# export KUBECONFIG=kubeconfig.yaml
 # kubectl apply -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
-kubectl apply -f calico.yaml
-kubectl rollout status daemonset calico-node -n kube-system
-kubectl get nodes -o wide
+echo "now deploying calico ...."
+KUBECONFIG=kubeconfig.yaml kubectl create -f calico.yaml
+KUBECONFIG=kubeconfig.yaml kubectl rollout status daemonset calico-node -n kube-system
+KUBECONFIG=kubeconfig.yaml kubectl get nodes -o wide
 echo "Enjoy the kubeadm with containerd on Multipass"
 echo "Now deploying the worker nodes"
