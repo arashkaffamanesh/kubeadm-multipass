@@ -152,7 +152,7 @@ open https://rancher.k8s.local
 #Should take you via HTTPS to Rancher without any warnings :-)
 ```
 
-Your valif certificate should look something like this:
+Your valid certificate should look something like this:
 
 ![mkcert.png](mkcert.png)
 
