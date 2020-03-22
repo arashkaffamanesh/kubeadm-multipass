@@ -60,7 +60,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: node-red.k8s.local 
+  - host: worker1 
     http:
       paths:
       - path: /

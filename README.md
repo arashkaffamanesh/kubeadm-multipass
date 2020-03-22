@@ -14,15 +14,24 @@ You need kubectl and multipass installed on your laptop.
 
 ### Install multipass (on MacOS Catalina or Linux)
 
-Multipass v0.9 has been released for MacOS Catalina, please download the latest release:
+Get the latest Multipass here:
 
 https://github.com/CanonicalLtd/multipass/releases
 
+## Installation (3 node with containerd)
+
+Deploy the master node, 2 worker nodes and join the worker nodes into the cluster step by step:
 
 ```bash
-wget https://github.com/CanonicalLtd/multipass/releases/download/v0.9.0/multipass-0.9.0+mac-Darwin.pkg
-sudo installer -target / -verbose -pkg multipass-0.9.0+mac-Darwin.pkg
-snap install multipass --channel beta/0.9 --classic
+./1-deploy-kubeadm-containerd-master.sh
+./2-deploy-kubeadm-containerd-nodes.sh
+./3-kubeadm_join_nodes.sh
+```
+
+or deploy with a single command:
+
+```bash
+./deploy-bonsai-containerd.sh
 ```
 
 ## Installation (3 node with docker)
@@ -39,22 +48,6 @@ or deploy with a single command:
 
 ```bash
 ./deploy.sh
-```
-
-## Installation (3 node with containerd)
-
-Deploy the master node, 2 worker nodes and join the worker nodes into the cluster step by step:
-
-```bash
-./1-deploy-kubeadm-containerd-master.sh
-./2-deploy-kubeadm-containerd-nodes.sh
-./3-kubeadm_join_nodes.sh
-```
-
-or deploy with a single command:
-
-```bash
-./deploy-bonsai-containerd.sh
 ```
 
 You should get something similar to this at the end:
