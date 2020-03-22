@@ -108,7 +108,7 @@ kubectl -n kube-system create secret tls traefik-tls-cert --key=_wildcard.k8s.lo
 kubectl apply -f configmap.yml
 kubectl create -f traefik.yaml
 kubectl apply -f rbac.yml
-get pods -n kube-system | grep traefik
+kubectl get pods -n kube-system | grep traefik
 # you should see a line that looks like the following
 traefik-ingress-controller-68c5fbccbd-5kjvw   1/1     Running
 ```
