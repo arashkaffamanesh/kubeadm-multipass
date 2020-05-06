@@ -1,6 +1,6 @@
 ![kubeadm-multipass.png](kubeadm-multipass.png)
 
-# Multi-Node Kubernetes 1.17 with kubeadm on local multipass cloud with Docker, Containerd or CRI-O and Rancher Server on top
+# Multi-Node Kubernetes 1.18.2 with kubeadm on local multipass cloud with Docker, Containerd or CRI-O and Rancher Server on top
 
 These simple scripts deploy a multi-node Kubernetes 1.17.0 with kubeadm on multipass VMs with Containerd, Docker or CRI-O on your local machine in about 6 minutes, depending on your internet speed.
 
