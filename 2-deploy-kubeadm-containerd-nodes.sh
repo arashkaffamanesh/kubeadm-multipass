@@ -15,6 +15,7 @@ multipass exec ${NODE} -- bash -c  "sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc
 multipass exec ${NODE} -- bash -c  'sudo modprobe br_netfilter'
 multipass exec ${NODE} -- bash -c 'sudo sysctl net.bridge.bridge-nf-call-iptables=1'
 multipass exec ${NODE} -- bash -c 'sudo echo 1 |  sudo tee  /proc/sys/net/ipv4/ip_forward'
+multipass exec ${NODE} -- bash -c 'sudo systemctl enable kubelet.service'
 done
 
 echo "Now running kubeadm join nodes"

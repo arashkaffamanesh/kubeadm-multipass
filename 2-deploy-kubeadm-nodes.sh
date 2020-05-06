@@ -21,6 +21,7 @@ multipass exec ${NODE} -- bash -c 'sudo apt-mark hold kubelet kubeadm kubectl'
 multipass exec ${NODE} -- bash -c 'sudo swapoff -a'
 multipass exec ${NODE} -- bash -c  "sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab"
 multipass exec ${NODE} -- bash -c 'sudo sysctl net.bridge.bridge-nf-call-iptables=1'
+multipass exec ${NODE} -- bash -c 'sudo systemctl enable kubelet.service'
 done
 
 echo "Now running kubeadm join nodes"
